@@ -5,9 +5,31 @@
         <meta name="google-signin-client_id" content="471328144693-1247pei37ngnd3klvsrj50g7b9b3eijb.apps.googleusercontent.com">
     </head>
     <body>
-        <!-- ini jangan dihapus untuk setting google sign in -->
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <!-- ini jangan dihapus -->
+        <section id="sign-button">
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <button id="logout">Log Out</button>
+        </section>
         <script src="https://apis.google.com/js/platform.js" async defer></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="main.js"></script>
         <script src="gSignIn.js"></script>
+        <!-- sampe sini plizz -->
     </body>
 </html>
+
+<style>
+    #logout{
+        height: 36px;
+        width: 120px;
+        border: none;
+        box-shadow: 0px 0px 4px grey;
+        background-color: white;
+        cursor: pointer;
+        margin: 1% auto;
+    }
+    #logout:hover{
+        box-shadow: 0px 0px 6px #2196F3;
+    }
+</style>
