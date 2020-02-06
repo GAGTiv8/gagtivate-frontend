@@ -95,20 +95,42 @@ function deleteImage(id) {
 
 // // OPTIONAL
 // function fetchByTag(tag) {
-// }
+// }    
+    //findAll Images by UserId --> setelah login berhasil
+    //findOneImage by specific Tag
+    //updateImage by Id
+    //deleteImage by Id
+function showLoginButton() {
+    $(".g-signin2").show()
+    $("button#logout").hide()
+}
 
-$(document).ready(() => {
-    //login
-    //logout
+function showLogoutButton(){
+    $(".g-signin2").hide()
+    $("button#logout").show()
+}
 
+function initialInterface() {
+    let token = localStorage.getItem('token')
+    if(token) {
+        showLogoutButton()
+    }
+    else showLoginButton()
+}
+
+$(document).ready(function() {
+    // initialInterface()
     //upload image
     $('#uploadAll').on("submit", (e) => {
         e.preventDefault()
         uploadImage()
     })
-    
-    //findAll Images by UserId --> setelah login berhasil
-    //findOneImage by specific Tag
-    //updateImage by Id
-    //deleteImage by Id
+
+    $("button#logout").on("click", () => {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            localStorage.clear()
+        });
+        // initialInterface()
+    })
 })
