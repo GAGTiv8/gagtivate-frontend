@@ -1,5 +1,6 @@
 function onSignIn(googleUser) {
     let id_token = googleUser.getAuthResponse().id_token;
+    console.log(id_token)
     axios({
         method: "POST",
         url: "http://localhost:3000/signin",
