@@ -10,18 +10,54 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <!-- ANDRU: ini jangan dihapus untuk setting google sign in -->
     <meta name="google-signin-client_id" content="471328144693-1247pei37ngnd3klvsrj50g7b9b3eijb.apps.googleusercontent.com">
+    <script
+    type="text/javascript"
+    src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <script type="text/javascript">
+        google.charts.load('current', { packages: ['corechart'] })
+        google.charts.setOnLoadCallback(drawChart)
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Sales'],
+                ['2004', 1000],
+                ['2005', 1170],
+                ['2006', 660],
+                ['2007', 1030]
+            ])
+
+            var options = {
+                title: 'Company Performance',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            }
+
+            var chart = new google.visualization.LineChart(
+                document.getElementById('curve_chart')
+            )
+
+            chart.draw(data, options)
+        }
+    </script>
 </head>
 <body>
+    <div class="container" style="margin: 0 auto; width:800px; text-align: center;">
+        <div id="curve_chart" style="width: 400px; height: 300px; align-items: center;"></div>
+    </div>
     <!-- CAKRA: navbar -->
     <nav>
         <div class="navbar" id="navbar">
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Posts</a></li>
-                <li><a href="#">Charts</a></li>
+                <li>Charts</li>
             </ul>
             <!-- ANDRU: ini jangan dihapus untuk setting google sign in -->
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <div id="login-menu">
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <button id="logout">logout</button>
+            </div>
         </div>
     </nav>
     <!-- CAKRA: display all image -->
@@ -84,6 +120,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></body>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="gSignIn.js"></script>    
     <script src="main.js"></script>
 </body>
