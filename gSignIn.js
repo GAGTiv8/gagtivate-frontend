@@ -11,6 +11,6 @@ function onSignIn(googleUser) {
             localStorage.setItem('id', response.data.id)
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err, `error OAuth`)
         })
 }
