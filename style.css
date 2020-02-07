@@ -1,3 +1,8 @@
+#main-menu{
+  background-color: black;
+  margin-bottom: 2%;
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -10,22 +15,20 @@ li {
   float: left;
 }
 
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-  background-color: #111;
-  text-decoration: none;
-}
-
 #login-menu{
   vertical-align: baseline;
+}
+
+#login-element{
+  margin: 5%;
+}
+
+#section-login{
+  padding: 5%;
+  width: 30%;
+  margin: auto;
+  text-align: -webkit-center;
+  box-shadow: 0px 0px 10px grey;
 }
 
 #logout{
@@ -39,4 +42,8 @@ li a:hover {
 
 #logout:hover{
   box-shadow: 0px 0px 8px #009cb1;
+}
+
+.w3-card-4{
+  margin: auto;
 }
