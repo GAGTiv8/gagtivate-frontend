@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" type="text/css" href="./style.css">
     <!-- ANDRU: ini jangan dihapus untuk setting google sign in -->
-    <meta name="google-signin-client_id" content="471328144693-1247pei37ngnd3klvsrj50g7b9b3eijb.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="471328144693-8kfbejaqv6tpqfun3t0ufkt6taa94o88.apps.googleusercontent.com">
     <script
     type="text/javascript"
     src="https://www.gstatic.com/charts/loader.js"
@@ -72,24 +72,37 @@
             <!-- CAKRA: mau bikin id=tag-image  -->
             <center><p>Tag #1 | <a href="#" onclick="deleteImage()">Delete</a></p></center>
         </div>
+        <div class="w3-card-4" style="width:50%" id="image-dashboard">
+
+        </div>
     </div>
     <br>
 
     <!-- CAKRA: upload form -->
     <div class="w3-container">
-        <form id="uploadImage">
+        <form id="addImage">
             <div class="formTitle">Upload New Image</div>
             <input class="input1" type="text" placeholder="title" name="uploadTitle" id="uploadTitle" required>
             <br>
             <input class="input1" type="text" placeholder="image" name="uploadImage" id="uploadImage" required>
             <br>
             <select name="uploadTag" id="uploadTag">
-                <option value="tag1">Tag1</option>
-                <option value="tag2">Tag2</option>
-                <option value="tag3">Tag3</option>
+                <option value="Family">Family</option>
+                <option value="Gamers">Gamers</option>
+                <option value="Motivate">Motivate</option>
+                <option value="Corona">Corona</option>
+                <option value="IT">IT</option>
+                <option value="Know Yourself">Know Yourself</option>
+                <option value="Office">Office</option>
+                <option value="Animals">Animals</option>
+                <option value="Travel">Travel</option>
+                <option value="Food & Drink">Food & Drink</option>
+                <option value="Business & Work">Business & Work</option>
+                <option value="Architecture">Architecture</option>
+                <option value="Textures & Patterns">Textures & Patterns</option>
             </select>
             <br>
-            <button class="button" type="submit" id="uploadAll">Submit</button>
+            <input class="button" type="submit" value="Submit"/>
         </form>
     </div>
 
