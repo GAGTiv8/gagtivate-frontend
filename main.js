@@ -1,151 +1,195 @@
-// const baseUrl = `http://localhost:3000`
+const baseUrl = `http://localhost:3000`
 
-function uploadImage() {
-    // e.preventDefault()
-    const newImage = $('#uploadTitle')
-    const newUrl = $('#uploadImage')
-    const newTag = $('#uploadTag')
-    console.log('masuk uploadImage')
-    console.log(newImage)
-    // const config = {
-    //     headers: { 
-    //         access_token: localStorage.token
-    //     }
-    // }
-    // axios.post('http://localhost:3000/posts', config)
-
-    $.ajax({
-        url: `http://localhost:3000/posts`,
-        method: `POST`,
-        data: {
-            title: newImage, 
-            url: newUrl, 
-            tags: newTag
-        },
+function hFetchAll() {
+    const token = localStorage.token
+    const config = {
         headers: {
-            access_token: localStorage.token
+            token
         }
+    }
+
+    axios
+        .get(baseUrl, config)
+        .then(({ data }) => {
+            const posts = data.data
+            console.log(posts)
+            $('#find-all-container').empty()
+            for (let i = 0; i < posts.length; i++) {
+                $('#find-all-container').append(`
+                <div class="w3-card-4" style="width:50%">
+                    <div class="w3-container w3-center">
+                        <p>${posts[i].title}</p>
+                    </div>
+                    <img
+                        src="${posts[i].url}"
+                        style="width:100%"
+                    />
+                    <center>
+                        <p>${posts[i].tags}</p>
+                    </center>
+                </div>
+                `)
+            }
+        })
+        .catch(err => {
+            console.log('err', err)
+        })
+}
+
+function createNewPost() {
+    const formData = new FormData()
+    const imagefile = document.querySelector('#gambar')
+    const UserId = localStorage.id
+    console.log(imagefile)
+    // const title = document.querySelector('#create-title')
+    // const tags = document.querySelector('#create-tags')
+    const title = $('#create-title').val()
+    const tags = $('#create-tags').val()
+    formData.append('title', title)
+    formData.append('UserId', UserId)
+    formData.append('tags', tags)
+    formData.append('image', imagefile.files[0])
+    axios
+        .post('http://localhost:3000', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(result => {
+            console.log(result)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+function hFetchTrends() {
+    const token = localStorage.token
+    const config = {
+        headers: {
+            token
+        }
+    }
+
+    axios
+        .get(baseUrl + '/trends', config)
+        .then(({ data }) => {
+            const posts = data.data
+            console.log(posts)
+            $('#trends-section').empty()
+            console.log(posts[0])
+            for (let i = 0; i < posts.length; i++) {
+                $('#trends-section').append(`
+                <div class="w3-card-4" style="width:50%">
+                    <div class="w3-container w3-center">
+                        <a href="${posts[i].url}">${posts[i].name}</a>
+                    </div>
+                    <center>
+                        <p>Total Tweets: ${posts[i].tweet_volume}</p>
+                    </center>
+                </div>
+                `)
+            }
+        })
+        .catch(err => {
+            console.log('err', err)
+        })
+}
+
+// END OF HERI
+
+
+function deleteImage(id) {
+    $.ajax({
+        url: `http://localhost:3000/${+id}`,
+        method: 'DELETE',
+        headers: {access_token: localStorage.access_token}
     })
-    .done(response => {
-        console.log(`upload success!`)
+    .done((data) => {
+        console.log(`post with ${id} deleted!`)
         fetchAll()
     })
-    .fail(err => {
-        console.log(`upload error`)
+    .fail((err) => {
+        console.log(err)
     })
 }
 
-// function fetchAll() {
-//     $.ajax(`http://localhost:3000/posts`, {
-//         method: 'GET',
-//         headers: {
-//             access_token: localStorage.access_token
-//         }
-//     })
-//     .done(images => {
-//         //belum tau format hasil images nya, coba console log dulu biar ga kegulung
-//         console.log(images.data)
-//         let newArr = images.data 
-//         $('#image-dashboard').empty()
-//         for (let i in newArr) {
-//             $('#image-dashboard').append(`
-//             <div class="w3-container w3-center">
-//             <p>${newArr[i].title}</p>
-//           </div>
-//           <img src=${newArr[i].url} style="width:100%">
-//           <center><p>Tag: ${newArr[i].tags}| <a href="#" onclick="deleteImage()">Delete</a></p></center>
-//             `)
-//         }
-//     })
-//     .fail(err => {
-//         console.log(err)
-//     })
-// }
-
-// function fetchOne(id) {
-//     $.ajax(`http://localhost:3000/posts/${id}`, {
-//         method: 'GET',
-//         headers: {
-//             access_token: localStorage.access_token
-//         }
-//     })
-//     .done(image => {
-//         //mau cek isi result image dulu
-//         console.log(image)
-//     })
-//     .fail(err => {
-//         console.log(err)
-//     })
-// }
-
-// function updateImage(id) {
-//     const editTitle = $('#editTitle')
-//     const editTag = $('#editTag')
-
-//     $.ajax(`http://localhost:3000/posts/${id}`, {
-//         method: 'PUT',
-//         data: {
-//             editTitle, editTag
-//         },
-//         headers: {
-//             access_token: localStorage.access_token
-//         }
-//     })
-//     .done(image => {
-//         console.log(image)
-//     })
-//     .fail(err => {
-//         console.log(err)
-//     })
-// }
-
-// function deleteImage(id) {
-//     $.ajax({
-//         url: `http://localhost:3000/posts/${+id}`,
-//         method: 'DELETE',
-//         headers: {access_token: localStorage.access_token}
-//     })
-//     .done((data) => {
-//         console.log(`post with ${id} deleted!`)
-//         fetchAll()
-//     })
-//     .fail((err) => {
-//         console.log(err)
-//     })
-// }
-
-// // OPTIONAL
-// function fetchByTag(tag) {
-// }    
-    //findAll Images by UserId --> setelah login berhasil
-    //findOneImage by specific Tag
-    //updateImage by Id
-    //deleteImage by Id
-
 function showLoginButton() {
-    $(".g-signin2").show()
-    $("main").hide()
-    $("header").hide()
+    $('#login-element').show()
+    $('main').hide()
+    $('header').hide()
+    $('div.container').hide()
 }
 
-function showLogoutButton(){
-    $(".g-signin2").hide()
-    $("main").show()
-    $("header").show()
+function showLogoutButton() {
+    // $('.g-signin2').hide()
+    $('#login-element').hide()
+    $('main').show()
+    $('header').show()
+    $('#find-all-container').show()
+    hFetchAll()
 }
 
 function initialInterface() {
-    $("div.container").hide()
-    $("div#findAll-container").hide()
+    $('div.container').hide()
+    // $('div#findAll-container').hide()
+    $('#find-all-container').hide()
     let token = localStorage.getItem('token')
-    if(token) {
+    if (token) {
         showLogoutButton()
-    }
-    else showLoginButton()
+    } else showLoginButton()
+}
+
+function drawChart() {
+    axios
+        .get('http://localhost:3000/charts')
+        .then(result => {
+            console.log(result)
+
+            const charts = result.data.data
+
+            const newchart = charts.map(el => {
+                return [el.date, +el.count]
+            })
+
+            newchart.unshift(['Date', 'Count'])
+
+            console.log(newchart)
+
+            var data = google.visualization.arrayToDataTable(newchart)
+
+            var options = {
+                title: 'Daily Uploads',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            }
+
+            var chart = new google.visualization.LineChart(
+                document.getElementById('curve_chart')
+            )
+
+            chart.draw(data, options)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 $(document).ready(function() {
     initialInterface()
+
+    // HERI
+
+    hFetchAll()
+
+    $('#upload-file').on('submit', function(event) {
+        event.preventDefault()
+        // console.log('cki')
+        createNewPost()
+    })
+
+    // END OF HERI
+
     //upload image
     // $('#uploadAll').on("submit", (e) => {
     //     e.preventDefault()
@@ -153,38 +197,69 @@ $(document).ready(function() {
     //     uploadImage()
     // })
 
-    $("#addImage").submit(function( event ) {
+    $('#show-new-post').on('click', function() {
+        // $('#form-new-post').show()
+
+        // $('#form-new-post').show()
+        $('#form-new-post').hide()
+        $('#find-all-container').hide()
+        $('#w3-container').show()
+        $('#trends-section').hide()
+        $('div.container').hide()
+
+        // $('#w3-container').show()
+        // $('#find-all-container').hide()
+        // $('#trends-section').hide()
+    })
+
+    $('#show-trends').on('click', function() {
+        $('#form-new-post').hide()
+        $('#find-all-container').hide()
+        $('#w3-container').hide()
+        $('#trends-section').show()
+        hFetchTrends()
+    })
+
+    $('#addImage').submit(function(event) {
         event.preventDefault()
         console.log('cki')
         uploadImage()
     })
 
-    $("button#logout").on("click", () => {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
+    $('button#logout').on('click', () => {
+        var auth2 = gapi.auth2.getAuthInstance()
+        auth2.signOut().then(function() {
             localStorage.clear()
-        });
+        })
+
         showLoginButton()
     })
-    
+
     // MEMUNCULKAN CHARTS-------------------
-    $("#show-charts").on("click", () => {
-        $("div.container").show()
-        $("div#findAll-container").hide()
-        $("div.w3-container").hide()
+    $('#show-charts').on('click', () => {
+        $('div.container').show()
+        $('#find-all-container').hide()
+        $('#w3-container').hide()
+        $('#trends-section').hide()
+        drawChart()
     })
 
     // BALIK KE HOME------------------------
-    $("#show-home").on("click", () => {
-        $("div#findAll-container").hide()
-        $("div.container").hide()
-        $("div.w3-container").show()
+    $('#show-home').on('click', () => {
+        $('#find-all-container').show()
+        // $('div.container').hide()
+        $('#w3-container').hide()
+        $('#trends-section').hide()
+        hFetchAll()
     })
 
-    $("#show-post").on("click", () => {
-        $("div.container").hide()
-        $("div#findAll-container").show()
-        $("div.w3-container").hide()
+    $('#show-post').on('click', () => {
+        $('div.container').hide()
+        $('#find-all-container').show()
+        $('#w3-container').hide()
+        $('#trends-section').hide()
     })
 
+    google.charts.load('current', { packages: ['corechart'] })
+    google.charts.setOnLoadCallback(drawChart)
 })
