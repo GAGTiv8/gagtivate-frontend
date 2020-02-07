@@ -10,6 +10,101 @@
     <link rel="stylesheet" type="text/css" href="./style.css">
     <!-- ANDRU: ini jangan dihapus untuk setting google sign in -->
     <meta name="google-signin-client_id" content="471328144693-8kfbejaqv6tpqfun3t0ufkt6taa94o88.apps.googleusercontent.com">
+
+</head>
+<body>
+    <header>
+        <!-- CAKRA: navbar -->
+        <nav id="main-menu">
+            <div class="navbar" id="navbar">
+                <ul>
+                    <li><button id="show-home">Home</button></li>
+                    <li><button id="show-post">Posts</button></li>
+                    <li><button id="show-charts">Charts</button></li>
+                </ul>
+                <!-- ANDRU: ini jangan dihapus untuk setting google sign in -->
+                <div><button id="logout">logout</button></div>
+            </div>
+        </nav>
+    </header>
+    <div id="login-element">
+        <section id="section-login">
+            <div>
+                
+            </div>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        </section>
+    </div>
+    <main>
+    <!-- CAKRA: display all image -->
+        <div id="findAll-container">
+            <div class="w3-card-4" style="width:50%">
+                <div class="w3-container w3-center">
+                    <!-- CAKRA: mau bikin id=title-image  -->
+                <p>Title #1</p>
+                </div>
+                <!-- CAKRA: mau bikin id=url-image  -->
+                <img src="https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="kitten" style="width:100%">
+                <!-- CAKRA: mau bikin id=tag-image  -->
+                <center><p>Tag #1 | <a href="#" onclick="deleteImage()">Delete</a></p></center>
+            </div>
+        </div>
+        <br>
+
+        <!-- CAKRA: upload form -->
+        <div class="w3-container">
+            <form id="uploadImg">
+                <div class="formTitle">Upload New Image</div>
+                <input class="input1" type="text" placeholder="title" name="uploadTitle" id="uploadTitle" required>
+                <br>
+                <input class="input1" type="text" placeholder="image" name="uploadImage" id="uploadImage" required>
+                <br>
+                <select name="uploadTag" id="uploadTag">
+                    <option value="tag1">Tag1</option>
+                    <option value="tag2">Tag2</option>
+                    <option value="tag3">Tag3</option>
+                </select>
+                <br>
+                <button class="button" type="submit" id="uploadAll">Submit</button>
+            </form>
+        </div>
+
+        <!-- CAKRA: edit form  -->
+        <div class="w3-container">
+            <form id="updateImage">
+                <div class="formTitle2">Edit Image</div>
+                <input class="input2" type="text" placeholder="title" name="editTitle" id="editTitle" required>
+                <br>
+                <select name="editTag" id="editTag">
+                    <option value="tag1">Tag1</option>
+                    <option value="tag2">Tag2</option>
+                    <option value="tag3">Tag3</option>
+                </select>
+                <br>
+                <button class="button" type="submit" id="editImage">Update</button>
+            </form>
+        </div>
+
+        <!-- trending disini -->
+
+        <!-- charts  -->
+
+        <!-- post by user  -->
+
+    </main>
+    <!-- CHARTS DIV ELEMENT -->
+    <div class="container" style="margin: 0 auto; width:800px; text-align: center;">
+        <div id="curve_chart" style="width: 400px; height: 300px; align-items: center;"></div>
+    </div>
+    <!-- jquery  -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></body>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="gSignIn.js"></script>    
+    <script src="main.js"></script>
     <script
     type="text/javascript"
     src="https://www.gstatic.com/charts/loader.js"
@@ -40,102 +135,5 @@
             chart.draw(data, options)
         }
     </script>
-</head>
-<body>
-    <div class="container" style="margin: 0 auto; width:800px; text-align: center;">
-        <div id="curve_chart" style="width: 400px; height: 300px; align-items: center;"></div>
-    </div>
-    <!-- CAKRA: navbar -->
-    <nav>
-        <div class="navbar" id="navbar">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Posts</a></li>
-                <li>Charts</li>
-            </ul>
-            <!-- ANDRU: ini jangan dihapus untuk setting google sign in -->
-            <div id="login-menu">
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                <button id="logout">logout</button>
-            </div>
-        </div>
-    </nav>
-    <!-- CAKRA: display all image -->
-    <div class="w3-container">
-        <div class="w3-card-4" style="width:50%">
-            <div class="w3-container w3-center">
-                <!-- CAKRA: mau bikin id=title-image  -->
-              <p>Title #1</p>
-            </div>
-            <!-- CAKRA: mau bikin id=url-image  -->
-            <img src="https://images.unsplash.com/photo-1560114928-40f1f1eb26a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="kitten" style="width:100%">
-            <!-- CAKRA: mau bikin id=tag-image  -->
-            <center><p>Tag #1 | <a href="#" onclick="deleteImage()">Delete</a></p></center>
-        </div>
-        <div class="w3-card-4" style="width:50%" id="image-dashboard">
-
-        </div>
-    </div>
-    <br>
-
-    <!-- CAKRA: upload form -->
-    <div class="w3-container">
-        <form id="addImage">
-            <div class="formTitle">Upload New Image</div>
-            <input class="input1" type="text" placeholder="title" name="uploadTitle" id="uploadTitle" required>
-            <br>
-            <input class="input1" type="text" placeholder="image" name="uploadImage" id="uploadImage" required>
-            <br>
-            <select name="uploadTag" id="uploadTag">
-                <option value="Family">Family</option>
-                <option value="Gamers">Gamers</option>
-                <option value="Motivate">Motivate</option>
-                <option value="Corona">Corona</option>
-                <option value="IT">IT</option>
-                <option value="Know Yourself">Know Yourself</option>
-                <option value="Office">Office</option>
-                <option value="Animals">Animals</option>
-                <option value="Travel">Travel</option>
-                <option value="Food & Drink">Food & Drink</option>
-                <option value="Business & Work">Business & Work</option>
-                <option value="Architecture">Architecture</option>
-                <option value="Textures & Patterns">Textures & Patterns</option>
-            </select>
-            <br>
-            <input class="button" type="submit" value="Submit"/>
-        </form>
-    </div>
-
-    <!-- CAKRA: edit form  -->
-    <div class="w3-container">
-        <form id="updateImage">
-            <div class="formTitle2">Edit Image</div>
-            <input class="input2" type="text" placeholder="title" name="editTitle" id="editTitle" required>
-            <br>
-            <select name="editTag" id="editTag">
-                <option value="tag1">Tag1</option>
-                <option value="tag2">Tag2</option>
-                <option value="tag3">Tag3</option>
-            </select>
-            <br>
-            <button class="button" type="submit" id="editImage">Update</button>
-        </form>
-    </div>
-
-    <!-- trending disini -->
-
-    <!-- charts  -->
-
-    <!-- post by user  -->
-
-    <!-- jquery  -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script></body>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="gSignIn.js"></script>    
-    <script src="main.js"></script>
 </body>
 </html>

@@ -124,15 +124,19 @@ function uploadImage() {
 
 function showLoginButton() {
     $(".g-signin2").show()
-    $("button#logout").hide()
+    $("main").hide()
+    $("header").hide()
 }
 
 function showLogoutButton(){
     $(".g-signin2").hide()
-    $("button#logout").show()
+    $("main").show()
+    $("header").show()
 }
 
 function initialInterface() {
+    $("div.container").hide()
+    $("div#findAll-container").hide()
     let token = localStorage.getItem('token')
     if(token) {
         showLogoutButton()
@@ -141,7 +145,7 @@ function initialInterface() {
 }
 
 $(document).ready(function() {
-    // initialInterface()
+    initialInterface()
     //upload image
     // $('#uploadAll').on("submit", (e) => {
     //     e.preventDefault()
@@ -160,8 +164,27 @@ $(document).ready(function() {
         auth2.signOut().then(function () {
             localStorage.clear()
         });
-        // initialInterface()
+        showLoginButton()
+    })
+    
+    // MEMUNCULKAN CHARTS-------------------
+    $("#show-charts").on("click", () => {
+        $("div.container").show()
+        $("div#findAll-container").hide()
+        $("div.w3-container").hide()
     })
 
-    
+    // BALIK KE HOME------------------------
+    $("#show-home").on("click", () => {
+        $("div#findAll-container").hide()
+        $("div.container").hide()
+        $("div.w3-container").show()
+    })
+
+    $("#show-post").on("click", () => {
+        $("div.container").hide()
+        $("div#findAll-container").show()
+        $("div.w3-container").hide()
+    })
+
 })
